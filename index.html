@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -460,6 +460,146 @@
     color:var(--teal);
   }
 
+  /* ---------- Gallery ---------- */
+  .gallery-filters{
+    display:flex;
+    gap:0.6rem;
+    margin-bottom:2.4rem;
+  }
+  .gfilter{
+    padding:0.55rem 1.2rem;
+    border:1px solid var(--line-on-light);
+    background:transparent;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    color:var(--ink);
+    opacity:0.55;
+    transition:opacity .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+  }
+  .gfilter.active, .gfilter:hover{opacity:1; border-color:var(--teal); color:var(--teal);}
+
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:230px;
+    gap:1rem;
+  }
+  .g-item{
+    position:relative;
+    display:block;
+    width:100%; height:100%;
+    border:none; padding:0;
+    overflow:hidden;
+    cursor:pointer;
+    background:var(--ink-2);
+  }
+  .g-item.g-hide{display:none;}
+  .g-item.g-video{grid-column:span 4; grid-row:span 2;}
+  .g-tile{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, var(--tile-a, #1F6F73), var(--tile-b, #123A4E));
+  }
+  .g-art{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center;
+    transition:transform .6s var(--ease);
+  }
+  .g-item:hover .g-art, .g-item:focus-visible .g-art{transform:scale(1.07);}
+  .g-play{
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:50px; height:50px;
+    border-radius:50%;
+    background:rgba(244,241,232,0.94);
+    color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow);
+  }
+  .g-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:1rem;
+    background:linear-gradient(0deg, rgba(6,20,28,0.88), transparent 90%);
+    color:var(--foam);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.03em;
+    line-height:1.4;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .g-item:hover .g-cap, .g-item:focus-visible .g-cap{opacity:1; transform:translateY(0);}
+
+  /* Lightbox */
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(6,18,25,0.95);
+    z-index:300;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden;
+    transition:opacity .35s var(--ease), visibility .35s;
+  }
+  .lightbox.open{opacity:1; visibility:visible;}
+  .lb-content{
+    width:min(88vw, 880px);
+    height:min(70vh, 560px);
+    position:relative;
+    background:var(--ink-3);
+    box-shadow:var(--shadow);
+  }
+  .lb-content svg, .lb-content iframe{
+    width:100%; height:100%; border:none; display:block;
+  }
+  .lb-placeholder{
+    width:100%; height:100%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:1rem; color:var(--foam);
+    text-align:center; padding:2rem;
+  }
+  .lb-placeholder .ph-icon{
+    width:56px; height:56px; border-radius:50%;
+    background:var(--teal); display:flex; align-items:center; justify-content:center;
+  }
+  .lb-placeholder p{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:rgba(244,241,232,0.65);
+    max-width:32ch;
+  }
+  .lb-caption{
+    margin-top:1.1rem;
+    color:var(--foam);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.03em;
+    text-align:center;
+  }
+  .lb-close, .lb-prev, .lb-next{
+    position:absolute;
+    background:none; border:none;
+    color:var(--foam);
+    font-size:1.8rem; line-height:1;
+    padding:0.6rem;
+    opacity:0.75;
+    transition:opacity .2s var(--ease);
+  }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover{opacity:1;}
+  .lb-close{top:-3rem; right:-0.5rem;}
+  .lb-prev{left:-3.2rem; top:50%; transform:translateY(-50%);}
+  .lb-next{right:-3.2rem; top:50%; transform:translateY(-50%);}
+
+  @media (max-width: 900px){
+    .gallery-grid{grid-template-columns:repeat(2, 1fr); grid-auto-rows:170px;}
+    .g-item.g-video{grid-column:span 2; grid-row:span 2;}
+    .lb-prev{left:0.4rem;}
+    .lb-next{right:0.4rem;}
+    .lb-close{top:0.6rem; right:0.6rem;}
+  }
+
   /* ---------- Field notes / testimonials ---------- */
   .field{
     background:var(--foam-2);
@@ -674,6 +814,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#blue-economy">Blue Economy</a></li>
       <li><a href="#work">Our Work</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#involve">Get Involved</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#involve" class="btn btn-gold">Donate</a></li>
@@ -851,6 +992,64 @@
     </div>
   </section>
 
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>See the work, in the field.</h2>
+        <p class="side">Photos and video from clean-ups, monitoring rounds, and community sessions across Victoria Island and the wider lagoon.</p>
+      </div>
+
+      <div class="gallery-filters" role="tablist" aria-label="Filter gallery by media type">
+        <button class="gfilter active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="gfilter" data-filter="photo" role="tab" aria-selected="false">Photos</button>
+        <button class="gfilter" data-filter="video" role="tab" aria-selected="false">Videos</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+
+        <button class="g-item reveal" data-type="photo" data-caption="From the field — WaterLife, Victoria Island">
+          <img class="g-art" loading="lazy"
+               src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783260116/IMG_20260626_125432_747.jpg_zrah8o.jpg"
+               alt="WaterLife NGO field work on the Victoria Island coastline">
+          <span class="g-cap">From the field — WaterLife, Victoria Island</span>
+        </button>
+
+        <button class="g-item reveal" data-type="photo" data-caption="From the field — WaterLife, Victoria Island">
+          <img class="g-art" loading="lazy"
+               src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783260943/583d6d24b8e9488684f088314bbd1e9a.jpg_mt0xe8.jpg"
+               alt="WaterLife NGO field work on the Victoria Island coastline">
+          <span class="g-cap">From the field — WaterLife, Victoria Island</span>
+        </button>
+
+        <button class="g-item reveal" data-type="photo" data-caption="From the field — WaterLife, Victoria Island">
+          <img class="g-art" loading="lazy"
+               src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783260943/662cef4b6e614039b01870ee3324c99a.jpg_idosdi.jpg"
+               alt="WaterLife NGO field work on the Victoria Island coastline">
+          <span class="g-cap">From the field — WaterLife, Victoria Island</span>
+        </button>
+
+        <button class="g-item reveal" data-type="photo" data-caption="From the field — WaterLife, Victoria Island">
+          <img class="g-art" loading="lazy"
+               src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783260942/fe1f86bb09544d7aba42580a2ae69811.jpg_u0mghd.jpg"
+               alt="WaterLife NGO field work on the Victoria Island coastline">
+          <span class="g-cap">From the field — WaterLife, Victoria Island</span>
+        </button>
+
+        <button class="g-item reveal g-video" data-type="video" data-caption="Watch: WaterLife in action"
+                data-video="https://res.cloudinary.com/dkwaxxkgb/video/upload/v1783260982/VID_20260626_142634_tyxbde.mp4">
+          <video class="g-art" muted loop playsinline autoplay preload="metadata">
+            <source src="https://res.cloudinary.com/dkwaxxkgb/video/upload/v1783260982/VID_20260626_142634_tyxbde.mp4" type="video/mp4">
+          </video>
+          <span class="g-play" aria-hidden="true">&#9654;</span>
+          <span class="g-cap">Watch: WaterLife in action</span>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+
   <!-- FIELD NOTES -->
   <section class="field">
     <div class="wrap">
@@ -958,6 +1157,7 @@
           <a href="#about">About</a>
           <a href="#blue-economy">Blue Economy</a>
           <a href="#work">Our Work</a>
+          <a href="#gallery">Gallery</a>
           <a href="#involve">Get Involved</a>
         </div>
         <div>
@@ -974,6 +1174,16 @@
     </div>
   </div>
 </footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lb-content" id="lbContent" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Previous item">&#8249;</button>
+    <button class="lb-next" id="lbNext" aria-label="Next item">&#8250;</button>
+    <div id="lbInner" style="width:100%; height:100%;"></div>
+    <div class="lb-caption" id="lbCaption" style="position:absolute; left:0; right:0; bottom:-2.2rem; margin-top:0;"></div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1085,6 +1295,97 @@
       showToast('Thanks, ' + name.split(' ')[0] + ' — your message is in our inbox.');
       form.reset();
     }, 700);
+  });
+
+  // ---------- Gallery: filters ----------
+  const galleryGrid = document.getElementById('galleryGrid');
+  const filterBtns = document.querySelectorAll('.gfilter');
+  let activeFilter = 'all';
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      activeFilter = btn.dataset.filter;
+      document.querySelectorAll('.g-item').forEach(item => {
+        const match = activeFilter === 'all' || item.dataset.type === activeFilter;
+        item.classList.toggle('g-hide', !match);
+      });
+    });
+  });
+
+  // ---------- Gallery: lightbox ----------
+  const lightbox = document.getElementById('lightbox');
+  const lbInner = document.getElementById('lbInner');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+
+  function currentSet(){
+    return Array.from(document.querySelectorAll('.g-item')).filter(el => !el.classList.contains('g-hide'));
+  }
+
+  let lbIndex = 0;
+
+  function renderLightbox(item){
+    const type = item.dataset.type;
+    const caption = item.dataset.caption || '';
+    lbCaption.textContent = caption;
+
+    if (type === 'video'){
+      const videoSrc = item.dataset.video;
+      const ytId = item.dataset.youtube;
+      if (videoSrc){
+        lbInner.innerHTML = '<video controls autoplay playsinline style="width:100%;height:100%;background:#000;object-fit:contain;"><source src="' + videoSrc + '" type="video/mp4"></video>';
+      } else if (ytId){
+        lbInner.innerHTML = '<iframe src="https://www.youtube.com/embed/' + ytId + '" title="' + caption.replace(/"/g,'&quot;') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      } else {
+        lbInner.innerHTML = '<div class="lb-placeholder"><span class="ph-icon">&#9654;</span><p>This clip is ready for your footage — add a video file or YouTube ID to this gallery item in index.html.</p></div>';
+      }
+    } else {
+      const img = item.querySelector('img.g-art');
+      if (img){
+        lbInner.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="' + (img.getAttribute('alt') || '').replace(/"/g,'&quot;') + '" style="width:100%;height:100%;object-fit:contain;background:#000;">';
+      }
+    }
+  }
+
+  function openLightbox(item){
+    const set = currentSet();
+    lbIndex = set.indexOf(item);
+    renderLightbox(item);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lbInner.innerHTML = '';
+  }
+
+  function step(delta){
+    const set = currentSet();
+    if (!set.length) return;
+    lbIndex = (lbIndex + delta + set.length) % set.length;
+    renderLightbox(set[lbIndex]);
+  }
+
+  document.querySelectorAll('.g-item').forEach(item => {
+    item.addEventListener('click', () => openLightbox(item));
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => step(-1));
+  lbNext.addEventListener('click', () => step(1));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
   });
 
   // ---------- Footer year ----------
