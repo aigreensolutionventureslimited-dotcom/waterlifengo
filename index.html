@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -276,7 +276,9 @@
   /* ---------- Hero ---------- */
   .hero{
     position:relative;
-    background:radial-gradient(ellipse at 20% 0%, #143C50 0%, var(--ink) 55%, #081C27 100%);
+    background:
+      linear-gradient(180deg, rgba(11,42,58,0.86) 0%, rgba(8,28,39,0.92) 65%, var(--ink) 100%),
+      url('https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783278569/ChatGPT_Image_Jul_5_2026_09_59_16_AM_afsr2u.png') center / cover no-repeat;
     color:var(--foam);
     padding-top:9.5rem;
     padding-bottom:3rem;
@@ -389,6 +391,16 @@
     align-items:center;
   }
   .about-grid p{color:rgba(11,42,58,0.75); margin-top:1.1rem; max-width:52ch;}
+  .about-figure{
+    aspect-ratio:480/420;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .about-figure img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center;
+  }
   .about-grid .quote{
     margin-top:1.8rem;
     padding-left:1.2rem;
@@ -830,7 +842,7 @@
   <!-- HERO -->
   <section class="hero" style="padding-bottom:0;">
     <div class="wrap">
-      <div class="hero-grid">
+      <div class="hero-grid" style="grid-template-columns:1fr;">
         <div>
           <span class="eyebrow">Marine Conservation · Blue Economy</span>
           <h1>Where the lagoon meets the ocean,<br> we keep the water <em>honest</em>.</h1>
@@ -839,19 +851,6 @@
             <a href="#work" class="btn btn-gold">See our work</a>
             <a href="#involve" class="btn btn-outline">Become a volunteer</a>
           </div>
-        </div>
-        <div class="hero-figure" aria-hidden="true">
-          <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="330" cy="60" r="46" fill="#C08A2E" opacity="0.9"/>
-            <path d="M0 150 Q 60 120 120 150 T 240 150 T 400 150 V 340 H 0 Z" fill="#123A4E"/>
-            <path d="M0 190 Q 60 165 120 190 T 240 190 T 400 190 V 340 H 0 Z" fill="#1F6F73" opacity="0.85"/>
-            <path d="M0 230 Q 60 210 120 230 T 240 230 T 400 230 V 340 H 0 Z" fill="#0E3244"/>
-            <g stroke="#F4F1E8" stroke-opacity="0.5" stroke-width="1.4" fill="none">
-              <path d="M40 260 q 10 -14 20 0 t 20 0"/>
-              <path d="M250 285 q 10 -14 20 0 t 20 0"/>
-              <path d="M150 300 q 10 -14 20 0 t 20 0"/>
-            </g>
-          </svg>
         </div>
       </div>
 
@@ -894,19 +893,10 @@
           <p>We believe cleanliness and purity of marine life aren't abstract ideals — they're measurable conditions we track tide by tide, and defend community by community.</p>
           <p class="quote">"You cannot separate the health of the water from the health of the people who live beside it."</p>
         </div>
-        <div class="reveal" aria-hidden="true">
-          <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="0" width="480" height="420" fill="#E9E3D2"/>
-            <path d="M0 260 Q 120 220 240 260 T 480 260 V 420 H 0 Z" fill="#1F6F73"/>
-            <path d="M0 300 Q 120 270 240 300 T 480 300 V 420 H 0 Z" fill="#123A4E"/>
-            <g fill="none" stroke="#3F6B4F" stroke-width="6" stroke-linecap="round">
-              <path d="M60 260 C 55 200 75 170 60 120"/>
-              <path d="M90 260 C 100 210 80 180 95 130"/>
-              <path d="M400 260 C 395 195 415 165 400 110"/>
-              <path d="M430 260 C 440 205 420 175 435 125"/>
-            </g>
-            <circle cx="240" cy="70" r="30" fill="#C08A2E"/>
-          </svg>
+        <div class="reveal about-figure">
+          <img src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783279133/ChatGPT_Image_Jul_5_2026_12_17_42_PM_2_chvhgu.png"
+               alt="WaterLife NGO — protecting marine life along Victoria Island, Lagos"
+               loading="lazy">
         </div>
       </div>
     </div>
@@ -1034,6 +1024,13 @@
                src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783260942/fe1f86bb09544d7aba42580a2ae69811.jpg_u0mghd.jpg"
                alt="WaterLife NGO field work on the Victoria Island coastline">
           <span class="g-cap">From the field — WaterLife, Victoria Island</span>
+        </button>
+
+        <button class="g-item reveal" data-type="photo" data-caption="WaterLife NGO — Victoria Island, Lagos">
+          <img class="g-art" loading="lazy"
+               src="https://res.cloudinary.com/dkwaxxkgb/image/upload/v1783278569/ChatGPT_Image_Jul_5_2026_09_59_16_AM_afsr2u.png"
+               alt="WaterLife NGO marine conservation work in Victoria Island, Lagos">
+          <span class="g-cap">WaterLife NGO — Victoria Island, Lagos</span>
         </button>
 
         <button class="g-item reveal g-video" data-type="video" data-caption="Watch: WaterLife in action"
